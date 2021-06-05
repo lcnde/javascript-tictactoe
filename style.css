@@ -90,13 +90,36 @@ body {
 
 .players-container {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 .player-class {
   display: flex;
+  flex-direction: column;
   gap: 20px;
   font-size: 20px;
   font-weight: 600;
   padding: 5px 0px;
+}
+.player-class h2 {
+  font-size: 26px;
+}
+
+#edit-player-name {
+  font-size: 22px;
+  vertical-align: bottom;
+}
+
+#restart {
+  width: 50%;
+  border: none;
+  border-radius: 100px;
+  background-color:chocolate;
+  padding: 10px 0px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 /*BOARD BORDERS*/
