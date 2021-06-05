@@ -12,24 +12,33 @@ const player = (name, score) => {
       spot.classList.add("spacex");
     });
   };
-
-
   return { name, score, mark }
 };
 
+const playerone = player('Player 1', 0);
+const playertwo = player('Player 2', 0);
 
-var spot = document.querySelectorAll(".space");
-spottable = Array.from(spot);
+
+var spot = document.querySelectorAll(".space"); //this selects all the elements that have the class of space
+spottable = Array.from(spot); //since that selecting multiple elements returns a "sort of array", we convert it to a real array
 console.log(spottable)
 
-spottable.forEach(function(element) {
-  element.addEventListener('click', () => {
+spottable.forEach(function(element) { //for each element inside "spottable we execute a function, where "element" is the individual elements took one by one
+  element.addEventListener('click', () => { //adds an event listener of click on each element and with an arrow function adds some code to them
+    magicBox.play(element);
+    /*
     element.classList.add("spacex");
     var id = element.getAttribute('id');
     console.log(id);
+    */
     });
 }); 
 
+const magicBox = {
+
+}
+
+//make a sort of magic box that controls the game. basically that magicbox has to be called after each click, and it knows perfectly which players turn it is, and which sign (x or 0) to put inside the empty space
 
 
 
