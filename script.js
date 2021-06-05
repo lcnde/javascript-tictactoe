@@ -17,6 +17,7 @@ const player = (name, score) => {
   return { name, score, mark }
 };
 
+
 var spot = document.querySelectorAll(".space");
 spottable = Array.from(spot);
 console.log(spottable)
@@ -24,8 +25,14 @@ console.log(spottable)
 spottable.forEach(function(element) {
   element.addEventListener('click', () => {
     element.classList.add("spacex");
+    var id = element.getAttribute('id');
+    console.log(id);
     });
-});
+}); 
+
+
+
+
 
 /*use a module as a game that will keep track of evereything. when you make moves with your players
 update the game variables, so you know when a player wins or loses, and when to assign points*/
