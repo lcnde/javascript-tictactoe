@@ -19,6 +19,29 @@ const playerone = player('Player 1', 0);
 const playertwo = player('Player 2', 0);
 
 
+const playerOneNameNode = document.querySelector('#edit-playerone-name');
+playerOneNameNode.addEventListener('click', () => {
+  editPlayerName.one();
+})
+
+const playerTwoNameNode = document.querySelector('#edit-playertwo-name');
+playerTwoNameNode.addEventListener('click', () => {
+  editPlayerName.two();
+})
+
+const editPlayerName = {
+  one: () => {
+    var newName = prompt('Write the new name');
+    var newNameNode = document.querySelector('#playeronename');
+    newNameNode.textContent = `${newName}`;
+  },
+  two: () => {
+    var newName = prompt('Write the new name');
+    var newNameNode = document.querySelector('#playertwoname');
+    newNameNode.textContent = `${newName}`;
+  }
+}
+
 var restartButton = document.querySelector("#restart");
 restartButton.addEventListener('click', () => {
   magicHelper.restart();
