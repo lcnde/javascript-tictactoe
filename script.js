@@ -19,6 +19,11 @@ const playerone = player('Player 1', 0);
 const playertwo = player('Player 2', 0);
 
 
+var restartButton = document.querySelector("#restart");
+restartButton.addEventListener('click', () => {
+  magicHelper.restart();
+})
+
 var spot = document.querySelectorAll(".space"); //this selects all the elements that have the class of space
 spottable = Array.from(spot); //since that selecting multiple elements returns a "sort of array", we convert it to a real array
 console.log(spottable)
@@ -125,6 +130,7 @@ const magicHelper = {
       element.removeAttribute('class');
       element.setAttribute('class', 'space')
       magicBox.roundFinished = false;
+      console.log('restarted');
     })
   }
 
