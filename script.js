@@ -39,6 +39,7 @@ const magicBox = { //this is the object that controls the flow of the game. by s
     magicHelper.signHelper(element); // the sign-helper helps the magicbox function to switch between x and 0
     magicHelper.addRound(); // the add-round adds a round after every match
     magicHelper.playerAddMove(element);
+    magicHelper.checkWin();
   },
   playerOneTurn: true, //just a function to know who's turn it is
   round: 0, //round counter
@@ -79,7 +80,19 @@ const magicHelper = {
   },
 
   checkWin: () => {
-    
+    if (magicBox.playerOneMoves.includes('1') && magicBox.playerOneMoves.includes('2') && magicBox.playerOneMoves.includes('3') ||
+        magicBox.playerOneMoves.includes('4') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('6') ||
+        magicBox.playerOneMoves.includes('7') && magicBox.playerOneMoves.includes('8') && magicBox.playerOneMoves.includes('9') ||
+        magicBox.playerOneMoves.includes('1') && magicBox.playerOneMoves.includes('4') && magicBox.playerOneMoves.includes('7') ||
+        magicBox.playerOneMoves.includes('2') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('8') ||
+        magicBox.playerOneMoves.includes('3') && magicBox.playerOneMoves.includes('6') && magicBox.playerOneMoves.includes('9') ||
+        magicBox.playerOneMoves.includes('1') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('9') ||
+        magicBox.playerOneMoves.includes('3') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('7')) {
+      console.log('player 1 won');
+      playerone.score += 1;
+      var score = document.querySelector('#player-one-score');
+      score.textContent = `Score: ${playerone.score}`;
+    }
   }
 
 };

@@ -122,6 +122,20 @@ body {
   font-weight: 600;
 }
 
+.history-container {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.history {
+  background-color: rgb(255, 249, 242);
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 /*BOARD BORDERS*/
   
   div[class^='space'] {
