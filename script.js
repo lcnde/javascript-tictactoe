@@ -15,6 +15,7 @@ const player = (name, score) => {
   return { name, score, mark }
 };
 
+
 const playerone = player('Player 1', 0);
 const playertwo = player('Player 2', 0);
 
@@ -58,6 +59,7 @@ spottable.forEach(function(element) { //for each element inside "spottable we ex
       addLog.cant();
     } else {
     magicBox.play(element);
+    magicHelper.playerTurnHighlight(); //initializes the highlight function after every turn so the players know their turn
     }
     /*
     element.classList.add("spacex");
@@ -155,6 +157,18 @@ const magicHelper = {
       magicBox.roundFinished = false;
       console.log('restarted');
     })
+  },
+
+  playerTurnHighlight: () => {
+    var playerOneHighlight = document.querySelector('.player-one-highlight');
+    var playerTwoHighlight = document.querySelector('.player-two-highlight');
+    if (magicBox.playerOneTurn == true) {
+      playerOneHighlight.classList.add('highlight');
+      playerTwoHighlight.classList.remove('highlight');
+    } else {
+      playerOneHighlight.classList.remove('highlight');
+      playerTwoHighlight.classList.add('highlight');
+    }
   }
 
 };
@@ -176,6 +190,9 @@ const addLog = {
     logHistory.insertBefore(createContent, logHistory.firstChild);
   }
 };
+
+
+magicHelper.playerTurnHighlight(); //initializes ONLY ONCE the highlight function
 
 //make a sort of magic box that controls the game. basically that magicbox has to be called after each click, and it knows perfectly which players turn it is, and which sign (x or 0) to put inside the empty space
 
