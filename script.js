@@ -25,7 +25,7 @@ console.log(spottable)
 
 spottable.forEach(function(element) { //for each element inside "spottable we execute a function, where "element" is the individual elements took one by one
   element.addEventListener('click', () => { //adds an event listener of click on each element and with an arrow function adds some code to them
-    if (magicBox.playerOneMoves.includes(element.getAttribute('id')) || magicBox.playerTwoMoves.includes(element.getAttribute('id'))) {
+    if (magicBox.playerOneMoves.includes(element.getAttribute('id')) || magicBox.playerTwoMoves.includes(element.getAttribute('id')) || magicBox.roundFinished == true) {
       console.log("you can't do that")
       addLog.cant();
     } else {
@@ -50,6 +50,8 @@ const magicBox = { //this is the object that controls the flow of the game. by s
   round: 0, //round counter
   playerOneMoves: [], //keeps track of the user choices
   playerTwoMoves: [], //keeps track of the user choices
+
+  roundFinished: false
 };
 
 const magicHelper = {
@@ -98,6 +100,7 @@ const magicHelper = {
       playerone.score += 1;
       var score = document.querySelector('#player-one-score');
       score.textContent = `Score: ${playerone.score}`;
+      magicBox.roundFinished = true;
     } else if (magicBox.playerTwoMoves.includes('1') && magicBox.playerTwoMoves.includes('2') && magicBox.playerTwoMoves.includes('3') ||
                magicBox.playerTwoMoves.includes('4') && magicBox.playerTwoMoves.includes('5') && magicBox.playerTwoMoves.includes('6') ||
                magicBox.playerTwoMoves.includes('7') && magicBox.playerTwoMoves.includes('8') && magicBox.playerTwoMoves.includes('9') ||
@@ -111,24 +114,37 @@ const magicHelper = {
             playertwo.score += 1;
             var score = document.querySelector('#player-two-score');
             score.textContent = `Score: ${playertwo.score}`;
+            magicBox.roundFinished = true;
     }
+  },
+
+  restart: () => {
+    magicBox.playerOneMoves = [];
+    magicBox.playerTwoMoves = [];
+    spottable.forEach(function(element) {
+      element.removeAttribute('class');
+      element.setAttribute('class', 'space')
+      magicBox.roundFinished = false;
+    })
   }
 
 };
 
 const addLog = {
   whoWon: (text) => {
-    var logHistory = document.querySelector('.history');
-    var createContent = document.createElement('div');
-    createContent.textContent = `${text} won!`;
-    logHistory.appendChild(createContent);
+    var logHistory = document.querySelector('.history'); //selects the .history class div
+    var createContent = document.createElement('div'); //creates a div
+    createContent.textContent = `${text} won! Press restart`;
+    //logHistory.appendChild(createContent);
+    logHistory.insertBefore(createContent, logHistory.firstChild); //inserts the new log text as first child
   },
 
   cant: () => {
     var logHistory = document.querySelector('.history');
     var createContent = document.createElement('div');
     createContent.textContent = "You can't do that!";
-    logHistory.appendChild(createContent);
+    //logHistory.appendChild(createContent);
+    logHistory.insertBefore(createContent, logHistory.firstChild);
   }
 };
 
