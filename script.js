@@ -35,8 +35,44 @@ spottable.forEach(function(element) { //for each element inside "spottable we ex
 }); 
 
 const magicBox = {
+  play: (element) => {
+    if (playerOneTurn == true) {
+      element.classList.add("spacex");
+    } else {
+      element.classList.add("space0")
+    };
+    
+    magicHelper.addRound();
+  },
+  playerOneTurn: true,
+  round: 0,
+  playerOneMoves: [],
+  playerTwoMoves: [],
+};
 
-}
+const magicHelper = {
+  addRound: () => {
+    magicBox.round += 1;
+  },
+
+  signHelper: () => {
+    
+  }
+
+  switchTurn: () => {
+    if (magicBox.playerOneTurn == true) {
+      magicBox.playerOneTurn = false;
+    } else {
+      magicBox.playerOneTurn = true;
+    };
+  },
+
+  playerOneAddMove: (element) => {
+    var id = element.getAttribute('id');
+    magicBox.playerOneMoves.push(id);
+  }
+
+};
 
 //make a sort of magic box that controls the game. basically that magicbox has to be called after each click, and it knows perfectly which players turn it is, and which sign (x or 0) to put inside the empty space
 
