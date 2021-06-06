@@ -25,7 +25,12 @@ console.log(spottable)
 
 spottable.forEach(function(element) { //for each element inside "spottable we execute a function, where "element" is the individual elements took one by one
   element.addEventListener('click', () => { //adds an event listener of click on each element and with an arrow function adds some code to them
+    if (magicBox.playerOneMoves.includes(element.getAttribute('id')) || magicBox.playerTwoMoves.includes(element.getAttribute('id'))) {
+      console.log("you can't do that")
+      addLog.cant();
+    } else {
     magicBox.play(element);
+    }
     /*
     element.classList.add("spacex");
     var id = element.getAttribute('id');
@@ -89,12 +94,42 @@ const magicHelper = {
         magicBox.playerOneMoves.includes('1') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('9') ||
         magicBox.playerOneMoves.includes('3') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('7')) {
       console.log('player 1 won');
+      addLog.whoWon('Player 1');
       playerone.score += 1;
       var score = document.querySelector('#player-one-score');
       score.textContent = `Score: ${playerone.score}`;
+    } else if (magicBox.playerTwoMoves.includes('1') && magicBox.playerTwoMoves.includes('2') && magicBox.playerTwoMoves.includes('3') ||
+               magicBox.playerTwoMoves.includes('4') && magicBox.playerTwoMoves.includes('5') && magicBox.playerTwoMoves.includes('6') ||
+               magicBox.playerTwoMoves.includes('7') && magicBox.playerTwoMoves.includes('8') && magicBox.playerTwoMoves.includes('9') ||
+               magicBox.playerTwoMoves.includes('1') && magicBox.playerTwoMoves.includes('4') && magicBox.playerTwoMoves.includes('7') ||
+               magicBox.playerTwoMoves.includes('2') && magicBox.playerTwoMoves.includes('5') && magicBox.playerTwoMoves.includes('8') ||
+               magicBox.playerTwoMoves.includes('3') && magicBox.playerTwoMoves.includes('6') && magicBox.playerTwoMoves.includes('9') ||
+               magicBox.playerTwoMoves.includes('1') && magicBox.playerTwoMoves.includes('5') && magicBox.playerTwoMoves.includes('9') ||
+               magicBox.playerTwoMoves.includes('3') && magicBox.playerTwoMoves.includes('5') && magicBox.playerTwoMoves.includes('7')) {
+            console.log('player 2 won');
+            addLog.whoWon('Player 2');
+            playertwo.score += 1;
+            var score = document.querySelector('#player-two-score');
+            score.textContent = `Score: ${playertwo.score}`;
     }
   }
 
+};
+
+const addLog = {
+  whoWon: (text) => {
+    var logHistory = document.querySelector('.history');
+    var createContent = document.createElement('div');
+    createContent.textContent = `${text} won!`;
+    logHistory.appendChild(createContent);
+  },
+
+  cant: () => {
+    var logHistory = document.querySelector('.history');
+    var createContent = document.createElement('div');
+    createContent.textContent = "You can't do that!";
+    logHistory.appendChild(createContent);
+  }
 };
 
 //make a sort of magic box that controls the game. basically that magicbox has to be called after each click, and it knows perfectly which players turn it is, and which sign (x or 0) to put inside the empty space
