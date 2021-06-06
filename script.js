@@ -19,7 +19,7 @@ const playerone = player('Player 1', 0);
 const playertwo = player('Player 2', 0);
 
 
-const playerOneNameNode = document.querySelector('#edit-playerone-name');
+const playerOneNameNode = document.querySelector('#edit-playerone-name'); //adds click event listener on the icons, then uses the object editPlayerName to edit the name
 playerOneNameNode.addEventListener('click', () => {
   editPlayerName.one();
 })
@@ -29,7 +29,7 @@ playerTwoNameNode.addEventListener('click', () => {
   editPlayerName.two();
 })
 
-const editPlayerName = {
+const editPlayerName = { //edits the player name
   one: () => {
     var newName = prompt('Write the new name');
     var newNameNode = document.querySelector('#playeronename');
@@ -42,7 +42,7 @@ const editPlayerName = {
   }
 }
 
-var restartButton = document.querySelector("#restart");
+var restartButton = document.querySelector("#restart"); //Adds the event listener on the button then uses the magicHelper.restart() function to restart the game
 restartButton.addEventListener('click', () => {
   magicHelper.restart();
 })
@@ -82,8 +82,8 @@ const magicBox = { //this is the object that controls the flow of the game. by s
   roundFinished: false
 };
 
-const magicHelper = {
-  addRound: () => {
+const magicHelper = { 
+  addRound: () => { // adds rounds but they are not displayed :(
     magicBox.round += 1;
   },
 
@@ -114,7 +114,7 @@ const magicHelper = {
     }
   },
 
-  checkWin: () => {
+  checkWin: () => { //checks when a player wins
     if (magicBox.playerOneMoves.includes('1') && magicBox.playerOneMoves.includes('2') && magicBox.playerOneMoves.includes('3') ||
         magicBox.playerOneMoves.includes('4') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('6') ||
         magicBox.playerOneMoves.includes('7') && magicBox.playerOneMoves.includes('8') && magicBox.playerOneMoves.includes('9') ||
@@ -124,11 +124,11 @@ const magicHelper = {
         magicBox.playerOneMoves.includes('1') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('9') ||
         magicBox.playerOneMoves.includes('3') && magicBox.playerOneMoves.includes('5') && magicBox.playerOneMoves.includes('7')) {
       console.log('player 1 won');
-      addLog.whoWon('Player 1');
-      playerone.score += 1;
-      var score = document.querySelector('#player-one-score');
-      score.textContent = `Score: ${playerone.score}`;
-      magicBox.roundFinished = true;
+      addLog.whoWon('Player 1'); //adds to log stuff
+      playerone.score += 1; //increments player score
+      var score = document.querySelector('#player-one-score'); //selects the score node
+      score.textContent = `Score: ${playerone.score}`; //updates the score node
+      magicBox.roundFinished = true; //sets the round to finished so the player can not fill in more boxes until he resets the round with the button
     } else if (magicBox.playerTwoMoves.includes('1') && magicBox.playerTwoMoves.includes('2') && magicBox.playerTwoMoves.includes('3') ||
                magicBox.playerTwoMoves.includes('4') && magicBox.playerTwoMoves.includes('5') && magicBox.playerTwoMoves.includes('6') ||
                magicBox.playerTwoMoves.includes('7') && magicBox.playerTwoMoves.includes('8') && magicBox.playerTwoMoves.includes('9') ||
