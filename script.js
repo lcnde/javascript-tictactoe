@@ -34,20 +34,16 @@ spottable.forEach(function(element) { //for each element inside "spottable we ex
     });
 }); 
 
-const magicBox = {
+const magicBox = { //this is the object that controls the flow of the game. by simply executing the play function after every input the game will go on
   play: (element) => {
-    if (playerOneTurn == true) {
-      element.classList.add("spacex");
-    } else {
-      element.classList.add("space0")
-    };
-    
-    magicHelper.addRound();
+    magicHelper.signHelper(element); // the sign-helper helps the magicbox function to switch between x and 0
+    magicHelper.addRound(); // the add-round adds a round after every match
+    magicHelper.playerAddMove(element);
   },
-  playerOneTurn: true,
-  round: 0,
-  playerOneMoves: [],
-  playerTwoMoves: [],
+  playerOneTurn: true, //just a function to know who's turn it is
+  round: 0, //round counter
+  playerOneMoves: [], //keeps track of the user choices
+  playerTwoMoves: [], //keeps track of the user choices
 };
 
 const magicHelper = {
@@ -55,11 +51,17 @@ const magicHelper = {
     magicBox.round += 1;
   },
 
-  signHelper: () => {
-    
-  }
+  signHelper: (element) => { //gets passed the "element" which is the node in which it has to add the class to fill it with X or O
+    if (magicBox.playerOneTurn == true) {
+      element.classList.add("spacex");
+      magicBox.playerOneTurn = false;
+    } else {
+      element.classList.add("space0")
+      magicBox.playerOneTurn = true;
+    };
+  },
 
-  switchTurn: () => {
+  switchTurn: () => { //switches turn
     if (magicBox.playerOneTurn == true) {
       magicBox.playerOneTurn = false;
     } else {
@@ -67,9 +69,17 @@ const magicHelper = {
     };
   },
 
-  playerOneAddMove: (element) => {
+  playerAddMove: (element) => { //adds the moves that each player made to their respective arrays
     var id = element.getAttribute('id');
-    magicBox.playerOneMoves.push(id);
+    if (magicBox.playerOneTurn == false) {
+      magicBox.playerOneMoves.push(id);
+    } else {
+      magicBox.playerTwoMoves.push(id);
+    }
+  },
+
+  checkWin: () => {
+    
   }
 
 };
